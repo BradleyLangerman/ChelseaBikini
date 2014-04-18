@@ -1,0 +1,306 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+  <title>
+    {% if template == 'index' %}{% if page_title contains 'Welcome' %}{{ shop.name }} &ndash; Welcome{% else %}{{ page_title }}{% endif %}{% elsif template == '404' %}Page Not Found{% elsif page_title contains shop.name %}{{ page_title }}{% else %}{{ page_title }} &ndash; {{ shop.name }}{% endif %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="canonical" href="{{ canonical_url }}" />
+
+  {% include 'fb-open-graph-tags' %}
+
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+  {% if settings.google_header_font != "none" %}
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ settings.google_header_font }}:300,400,700">
+  {% endif %}
+  {% if settings.google_nav_font != "none" %}
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ settings.google_nav_font }}:300,400,700">
+  {% endif %}
+  {{ 'html5shiv.js' | asset_url | script_tag }}
+
+  <!--  Font Awesome!  -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+  {{ content_for_header }}
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+
+  {% if template contains 'customers' %}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+</head>
+
+<body>
+
+  <!-- Begin toolbar -->
+  <div class="toolbar-wrapper">
+    <div class="toolbar clearfix">
+      <div class="span12 clearfix">
+        <ul class="unstyled">
+
+          <!-- Social Icons -->
+          <i class="fa fa-pinterest fa-2x fa-inverse"></i>
+          <i class="fa fa-instagram fa-2x fa-inverse"></i>                      
+          <i class="fa fa-facebook fa-2x fa-inverse"></i>
+          <i class="fa fa-twitter fa-2x fa-inverse"></i>
+
+          </li>
+          {% if cart.item_count != 0 %}
+          <li id="checkout-link"><a href="/cart" title="Checkout">Checkout</a></li>
+          {% endif %}
+          <li><span class="icon-cart"></span><a href="/cart" class="cart" title="Shopping Cart">Cart: {{ cart.item_count }}</a></li>
+          {% include 'customer_links' %}
+          {% if settings.top_bar_linklist != blank %}
+          {% for link in linklists[settings.top_bar_linklist].links %}
+          <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+          {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End toolbar -->
+
+  <!-- Begin wrapper -->
+  <div id="transparency" class="wrapper">
+    <div class="row">
+      <!-- Begin right navigation -->
+      {% if settings.navigation_alignment == "right" %}
+      <div class="row" id="header">
+        <div class="span12 border-bottom">
+          <div class="span3 inner-left">
+            <div class="logo">
+              {% if settings.use_logo %}
+              <a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
+              {% if template == 'index' %}
+              <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+              {% endif %}
+              {% else %}
+              <h1><a href="/">{{ shop.name }}</a></h1>
+              {% endif %}
+            </div>
+          </div>
+
+          <section id="nav">
+            <div class="span9 inner-right">
+              <nav class="main">
+                {% include 'dropdown' %}
+              </nav>
+              <nav class="mobile clearfix">
+                {% include 'mobile-menu' %}
+              </nav>
+            </div>
+          </section>
+        </div>
+      </div>
+      {% endif %}
+      <!-- End right navigation -->
+
+      <!-- Begin below navigation -->
+      {% if settings.navigation_alignment == "below" %}
+      <div class="span12 clearfix">
+        <div class="logo">
+          {% if settings.use_logo %}
+          <a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
+          {% if template == 'index' %}
+          <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+          {% endif %}
+          {% else %}
+          <h1><a href="/">{{ shop.name }}</a></h1>
+          {% endif %}
+        </div>
+      </div>
+
+      <section id="nav" class="row">
+        <div class="span12">
+          <nav class="main">
+            {% include 'dropdown' %}
+          </nav> <!-- /.main -->
+          <nav class="mobile clearfix">
+            {% include 'mobile-menu' %}
+          </nav> <!-- /.mobile -->
+        </div>
+      </section>
+      {% endif %}
+      <!-- End below navigation -->
+
+      <!-- Begin content-->
+      <section id="content" class="clearfix">
+          {% if template == "list-collections" %}
+          <div id="collection" class="row">
+            <div class="span12">
+              <h1><span>Product Collections</span></h1>
+            </div> <!-- /.span12 -->
+          </div> <!-- /.row -->
+
+          <div class="row products masonry">
+            {% for collection in collections %}
+            {% include 'collection-loop' %}
+            {% endfor %}
+          </div> <!-- /#collection.row -->
+          {% else %}
+          {{ content_for_layout }}
+          {% endif %}
+      </section>
+      <!-- End content-->
+
+    </div>
+  </div>
+  <!-- End wrapper -->
+
+  <!-- Begin footer -->
+  <div class="footer-wrapper">
+    <footer>
+      <div class="row">
+
+        <div class="span12 full-border"></div>
+
+        <!-- Begin latest blog post -->
+        {% if settings.footer_blog_post and blogs[settings.footer_blog_post].handle == settings.footer_blog_post and blogs[settings.footer_blog_post].articles.size > 0 %}
+        {% assign article = blogs[settings.footer_blog_post].articles.first %}
+        <div class="span4">
+          <div class="p30">
+            <h4><a href="/blogs/{{ settings.footer_blog_post }}">{{ settings.footer_blog_post_header }}</a></h4>
+            <p class="p10"><strong>{{ article.title | link_to: article.url }}</strong></p>
+            <p>{{ article.content | strip_html | truncatewords: 30 }}</p>
+          </div>
+        </div>
+        {% endif %}
+        <!-- End latest blog post -->
+
+        <!-- Begin footer navigation -->
+        <div class="span4 footer-menu">
+          <h4>{{ settings.footer_linklist_title }}</h4>
+          <ul class="unstyled">
+            {% for link in linklists[settings.footer_linklist].links %}
+              <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- End footer navigation -->
+
+        <!-- Begin newsletter/social -->
+        <div class="span4">
+
+          {% if settings.footer_display_newsletter %}
+          <div class="p30">
+            <h4>{{ settings.footer_newsletter_title }}</h4>
+            <form action="{{ settings.mailing_list_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+              <input type="email" value="" placeholder="Email Address" name="EMAIL" id="mail" /><input type="submit" class="btn newsletter" value="Subscribe" name="subscribe" id="subscribe" />
+            </form>
+          </div>
+          {% endif %}
+
+          <div class="clearfix">
+          {% if settings.enable_social_links %}
+            <h4>{{ settings.footer_social_title }}</h4>
+            {% if settings.twitter_link != '' %}<a href="{{ settings.twitter_link }}" title="{{ shop.name }} on Twitter" class="icon-social twitter">Twitter</a>{% endif %}
+            {% if settings.facebook_link != '' %}<a href="{{ settings.facebook_link }}" title="{{ shop.name }} on Facebook" class="icon-social facebook">Facebook</a>{% endif %}
+            {% if settings.youtube_link != '' %}<a href="{{ settings.youtube_link }}" title="{{ shop.name }} on YouTube" class="icon-social youtube">YouTube</a>{% endif %}
+            {% if settings.atom_link != '' %}<a href="{{ settings.atom_link }}" title="{{ shop.name }} news" class="icon-social atom">Blog feed</a>{% endif %}
+            {% if settings.instagram_link != '' %}<a href="{{ settings.instagram_link }}" title="{{ shop.name }} on Instagram" class="icon-social instagram">Instagram</a>{% endif %}
+            {% if settings.pinterest_link != '' %}<a href="{{ settings.pinterest_link }}" title="{{ shop.name }} on Pinterest" class="icon-social pinterest">Pinterest</a>{% endif %}
+            {% if settings.vimeo_link != '' %}<a href="{{ settings.vimeo_link }}" title="{{ shop.name }} on Vimeo" class="icon-social vimeo">Vimeo</a>{% endif %}
+            {% if settings.tumblr_link != '' %}<a href="{{ settings.tumblr_link }}" title="{{ shop.name }} on Tumblr" class="icon-social tumblr">Tumblr</a>{% endif %}
+            {% if settings.google_link != '' %}<a href="{{ settings.google_link }}" title="{{ shop.name }} on Google+" class="icon-social google">Google+</a>{% endif %}
+          {% endif %}
+          </div>
+
+        </div>
+        <!-- End newsletter/social -->
+
+        <!-- Begin copyright -->
+        <div class="span12 tc copyright">
+          <p>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name }} | {{ powered_by_link }} {% if settings.designed_by %}{% endif %} </p>
+          <ul class="credit-cards clearfix">
+            {% if settings.accept_visa %}<li><img src="{{ 'icon-cc-visa.gif' | asset_url }}" alt="Visa" /></li>{% endif %}
+            {% if settings.accept_mastercard %}<li><img src="{{ 'icon-cc-mastercard.gif' | asset_url }}" alt="MasterCard" /></li>{% endif %}
+            {% if settings.accept_amex %}<li><img src="{{ 'icon-cc-amex.gif' | asset_url }}" alt="Amex" /></li>{% endif %}
+            {% if settings.accept_cirrus %}<li><img src="{{ 'icon-cc-cirrus.gif' | asset_url }}" alt="Cirrus" /></li>{% endif %}
+            {% if settings.accept_delta %}<li><img src="{{ 'icon-cc-delta.gif' | asset_url }}" alt="Delta" /></li>{% endif %}
+            {% if settings.accept_discover %}<li><img src="{{ 'icon-cc-discover.gif' | asset_url }}" alt="Discover" /></li>{% endif %}
+            {% if settings.accept_westernunion %}<li><img src="{{ 'icon-cc-westernunion.gif' | asset_url }}" alt="Western Union" /></li>{% endif %}
+            {% if settings.accept_paypal %}<li><img src="{{ 'icon-cc-paypal.gif' | asset_url }}" alt="PayPal" /></li>{% endif %}
+            {% if settings.accept_bitcoin %}<li><img src="{{ 'icon-cc-bitcoin.gif' | asset_url }}" alt="Bitcoin" /></li>{% endif %}
+          </ul> <!-- /.credit-cards -->
+        </div>
+        <!-- End copyright -->
+
+      </div>
+    </footer>
+  </div>
+  <!-- End footer -->
+
+  {% if settings.display_slideshow %}
+    {{ 'jquery.flexslider-min.js' | asset_url | script_tag }}
+  {% endif %}
+  {% if settings.enable_product_image_zoom %}
+    {{ 'jquery.zoom.js' | asset_url | script_tag }}
+  {% endif %}
+  {{ 'jquery.tweet.js' | asset_url | script_tag }}
+  {{ 'jquery.fancybox.js' | asset_url | script_tag }}
+  {{ 'scripts.js' | asset_url | script_tag }}
+
+  {% if template contains 'product' %}
+
+  <script>
+
+  var selectCallback = function(variant, selector) {
+    if (variant && variant.available) {
+      jQuery('#add-to-cart').removeAttr('disabled').removeClass('disabled'); // remove unavailable class from add-to-cart button, and re-enable button
+      if(variant.price < variant.compare_at_price){
+        jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + " <del>" + Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}") + "</del>");
+      } else {
+        jQuery('#price-preview').html(Shopify.formatMoney(variant.price, "{{ shop.money_format }}"));
+      }
+    } else {
+      jQuery('#add-to-cart').addClass('disabled').attr('disabled', 'disabled'); // set add-to-cart button to unavailable class and disable button
+      var message = variant ? "Sold Out" : "Unavailable";
+      jQuery('#price-preview').text(message);
+    }
+  };
+
+  jQuery(document).ready(function($){
+    new Shopify.OptionSelectors("product-select", { product: {{ product | json }}, onVariantSelected: selectCallback });
+
+    // Add label if only one product option and it isn't 'Title'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+    {% endif %}
+
+    // Auto-select first available variant on page load.
+    {% assign found_one_in_stock = false %}
+    {% for variant in product.variants %}
+      {% if variant.available and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+        {% for option in product.options %}
+        $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+  });
+  //End product-options script
+  </script>
+  {% endif %}
+</body>
+</html>

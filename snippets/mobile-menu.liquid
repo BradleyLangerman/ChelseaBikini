@@ -1,0 +1,31 @@
+{% assign found_active_link = false %}
+<select name="main_navigation" id="main_navigation" class="fl">
+  {% for link in linklists.main-menu.links %}
+    {% if link.active and found_active_link == false %}
+    <option value="{{ link.url }}" selected="selected">{{ link.title }}</option>
+    {% assign found_active_link = true %}
+    {% else %}
+    <option value="{{ link.url }}">{{ link.title }}</option>
+    {% endif %}
+    {% for childlink in linklists[link.handle].links %}
+      {% if childlink.active %}
+      <option value="{{ childlink.url }}" selected="selected">- {{ childlink.title }}</option>
+      {% assign found_active_link = true %}
+      {% else %}
+      <option value="{{ childlink.url }}">- {{ childlink.title }}</option>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  {% unless found_active_link %}
+    {% if template contains 'product' %}
+    <option value="" selected="selected">{{ product.title }}</option>
+    {% elsif template contains 'collection' %}
+    <option value="" selected="selected">{{ collection.title }}</option>
+    {% elsif template contains 'page' %}
+    <option value="" selected="selected">{{ page.title }}</option>
+    {% else %}
+    <option value="" selected="selected">{{ page_title }}</option>
+    {% endif %}
+  {% endunless %}
+  <option value="/cart">Your cart ({{ cart.item_count }})</option>
+</select>
