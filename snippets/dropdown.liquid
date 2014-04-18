@@ -1,9 +1,11 @@
-{% if settings.navigation_alignment == "right" %}
+<!-- {% if settings.navigation_alignment == "right" %}
 <ul class="horizontal fr unstyled clearfix">
 {% endif %}
+
 {% if settings.navigation_alignment == "below" %}
 <ul class="horizontal unstyled clearfix">
 {% endif %}
+
   {% for link in linklists.main-menu.links %}
   {% if linklists[link.handle] == empty %}
   <li{% if settings.display_collection_dropdown and link.type == 'collection_link' and link.object.tags.size > 0 %} class="dropdown"{% endif %}{% if settings.display_blog_dropdown and link.type == 'blog_link' and link.object.articles.size > 0 %} class="dropdown"{% endif %}>
@@ -33,4 +35,16 @@
   </li>
   {% endif %}
   {% endfor %}
-</ul>
+</ul> -->
+
+<ul class='big-nav-content span12'>
+  {% for link in linklists.main-menu.links %}
+    {% if linklists[link.handle] == empty %}
+      <li><a href="{{ link.url }}" class=
+        "{%if link.active%}current {%endif%}{% if forloop.first %} first {% elsif %}{% if forloop.last %} last {% else %}{% if !forloop.first and !forloop.last %} middle {% endif %}"
+        ><span>{{ link.title }}</span></a>
+      </li>      
+    {% endif %}
+  {% endfor %}
+</ul>  
+
