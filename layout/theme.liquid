@@ -58,10 +58,10 @@
         <ul class="unstyled">
 
           <!-- Social Icons -->
-          <i class="fa fa-pinterest fa-2x fa-inverse"></i>
-          <i class="fa fa-instagram fa-2x fa-inverse"></i>                      
-          <i class="fa fa-facebook fa-2x fa-inverse"></i>
-          <i class="fa fa-twitter fa-2x fa-inverse"></i>
+          <a href="{{ settings.pinterest_link }}" title="{{ shop.name }} on Pinterest"><i class="fa fa-pinterest fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.instagram_link }}" title="{{ shop.name }} on Instagram"><i class="fa fa-instagram fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.facebook_link }}" title="{{ shop.name }} on Facebook"><i class="fa fa-facebook fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.twitter_link }}" title="{{ shop.name }} on Twitter"><i class="fa fa-twitter fa-2x fa-inverse"></i></a>
 
           </li>
           {% if cart.item_count != 0 %}
