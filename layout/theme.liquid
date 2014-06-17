@@ -21,6 +21,12 @@
 
   <link rel="canonical" href="{{ canonical_url }}" />
 
+  <!--  Font Awesome!  -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+  <!--  Google Fonts  -->
+  <link href='http://fonts.googleapis.com/css?family=Cinzel:400,700' rel='stylesheet' type='text/css'>
+
   {% include 'fb-open-graph-tags' %}
 
   {{ 'styles.css' | asset_url | stylesheet_tag }}
@@ -31,9 +37,6 @@
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family={{ settings.google_nav_font }}:300,400,700">
   {% endif %}
   {{ 'html5shiv.js' | asset_url | script_tag }}
-
-  <!--  Font Awesome!  -->
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
   {{ content_for_header }}
 
@@ -50,7 +53,6 @@
 </head>
 
 <body>
-
   <!-- Begin toolbar -->
   <div class="toolbar-wrapper">
     <div class="toolbar clearfix">
@@ -79,6 +81,23 @@
     </div>
   </div>
 
+<!--  Begin Logo  -->
+  <div class='main-logo wrapper'>
+    <div class="span3 inner-left">
+      <div class="logo">
+        {% if settings.use_logo %}
+        <a href="/">Chelsea Bikinii </a>
+        {% if template == 'index' %}
+        <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+        {% endif %}
+        {% else %}
+        <h1><a href="/">{{ shop.name }}</a></h1>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
   <div class='full-stretch-nav'>
     <div class='big-nav-content wrapper'>
       {% include 'dropdown' %}
@@ -92,20 +111,7 @@
       <!-- Begin right navigation -->
       {% if settings.navigation_alignment == "right" %}
       <div class="row" id="header">
-        <div class="span12 border-bottom">
-          <div class="span3 inner-left">
-            <div class="logo">
-              {% if settings.use_logo %}
-              <a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
-              {% if template == 'index' %}
-              <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
-              {% endif %}
-              {% else %}
-              <h1><a href="/">{{ shop.name }}</a></h1>
-              {% endif %}
-            </div>
-          </div>
-
+        <div class="span12">
           <section id="nav">
             <div class="span9 inner-right">
               <nav class="mobile clearfix">
@@ -234,17 +240,6 @@
         <!-- Begin copyright -->
         <div class="span12 tc copyright">
           <p>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name }} | {{ powered_by_link }} {% if settings.designed_by %}{% endif %} </p>
-          <ul class="credit-cards clearfix">
-            {% if settings.accept_visa %}<li><img src="{{ 'icon-cc-visa.gif' | asset_url }}" alt="Visa" /></li>{% endif %}
-            {% if settings.accept_mastercard %}<li><img src="{{ 'icon-cc-mastercard.gif' | asset_url }}" alt="MasterCard" /></li>{% endif %}
-            {% if settings.accept_amex %}<li><img src="{{ 'icon-cc-amex.gif' | asset_url }}" alt="Amex" /></li>{% endif %}
-            {% if settings.accept_cirrus %}<li><img src="{{ 'icon-cc-cirrus.gif' | asset_url }}" alt="Cirrus" /></li>{% endif %}
-            {% if settings.accept_delta %}<li><img src="{{ 'icon-cc-delta.gif' | asset_url }}" alt="Delta" /></li>{% endif %}
-            {% if settings.accept_discover %}<li><img src="{{ 'icon-cc-discover.gif' | asset_url }}" alt="Discover" /></li>{% endif %}
-            {% if settings.accept_westernunion %}<li><img src="{{ 'icon-cc-westernunion.gif' | asset_url }}" alt="Western Union" /></li>{% endif %}
-            {% if settings.accept_paypal %}<li><img src="{{ 'icon-cc-paypal.gif' | asset_url }}" alt="PayPal" /></li>{% endif %}
-            {% if settings.accept_bitcoin %}<li><img src="{{ 'icon-cc-bitcoin.gif' | asset_url }}" alt="Bitcoin" /></li>{% endif %}
-          </ul> <!-- /.credit-cards -->
         </div>
         <!-- End copyright -->
 
