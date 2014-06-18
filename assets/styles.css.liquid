@@ -39,6 +39,9 @@
 /*    6.2 - FlexSlider plugin
 /*    6.3 - jQuery Tabs
 /*
+/*  SECTION 7
+/*    7.1 - TH Overrides
+/*
 
 /*  Google Fonts
 /*
@@ -297,70 +300,6 @@ ul.expanded > li, ol.expanded > li { margin-bottom: 10px; }
 /*      SECTION 3      */
 /* =================== */
 
-/* TH CUSTOM Stuff */
-
-
-
-.full-stretch-nav {
-  width:100%;
-  margin-top:30px;
-  height: 40px;
-  background: #f7f7f7;;
-  border-top:1px solid #e5e5e5;
-  border-bottom:1px solid #e5e5e5;
-}
-
-.full-stretch-nav .big-nav-content {
-  height:100%;
-  background: #f7f7f7;;
-}
-
-.full-stretch-nav .big-nav-content ul {
-  vertical-align: middle;
-  height:100%;
-  position:relative;
-  display:block;
-  text-align: center;
-  position:relative;
-}
-
-.full-stretch-nav .big-nav-content li {
-  vertical-align: middle;
-  text-align: center;
-  width:120px;
-  display: inline-block;
-}
-
-.full-stretch-nav .big-nav-content .first {
-  border-left:1px solid #cccccc;
-}
-
-.full-stretch-nav .big-nav-content .middle  {
-  border-left:1px solid #cccccc;
-}
-
-.full-stretch-nav .big-nav-content .last {
-  border-left:1px solid #cccccc;
-  border-right:1px solid #cccccc;
-}
-
-.full-stretch-nav .big-nav-content li {
-  line-height: 50%;
-  width:190px;
-  min-height:100%;
-}
-
-.full-stretch-nav .big-nav-content li a {
-  font-family: 'PT Serif', serif;
-  font-weight: 300;
-  font-size: 1.25em;
-  text-align: center;
-  line-height: 40px;
-  vertical-align: middle;
-  vertical-align: middle;
-  text-transform:uppercase;
-}
-
 /* 3.1 - Toolbar */
 .toolbar { color: {{ settings.toolbar_text_color }}; font-size: 12px; }
 .toolbar .fa { padding: 5px 5px }
@@ -458,7 +397,7 @@ footer { padding: 0; }
 {% if settings.footer_border_style == "regular_width" %}
 footer > .row > .span12.full-border { border-top: 1px {{ settings.border_style }} {{ settings.footer_border_color }}; }
 {% endif %}
-footer > .row > .span12 { padding: 30px 0 0; }
+footer > .row > .span12 { padding: 0px 0 0; }
 footer { padding-bottom: 5px; }
 footer .row { margin-bottom: 0; }
 footer, footer p { color: {{ settings.footer_text_color }}; }
@@ -665,7 +604,7 @@ div.errors { margin-bottom: 15px; }
   #header .logo { padding-bottom: 0 !important; }
   #header .logo a img { max-width: 200px; }
   /* .featured img { max-width: 468px !important; } */
-  .footer-menu { margin-bottom: 20px; }
+  .footer-menu { margin-bottom: 20px; }  
 }
 
 /* 4.3 - Mobile Landscape */
@@ -844,3 +783,95 @@ ul.tabs { zoom: 1; }
 
 /* grapevine reviews */
 .spr-form input[type="text"], .spr-form input[type="email"] { max-width: 200px; display: block;}
+
+/* =================== */
+/*      SECTION 7      */
+/* =================== */
+
+/* 7.1 TH Overrides */
+
+.full-stretch-nav {
+  width:100%;
+  margin-top:30px;
+  height: 40px;
+  background: #f7f7f7;;
+  border-top:1px solid #e5e5e5;
+  border-bottom:1px solid #e5e5e5;
+}
+
+.full-stretch-nav .big-nav-content {
+  height:100%;
+  background: #f7f7f7;;
+}
+
+.full-stretch-nav .big-nav-content ul {
+  vertical-align: middle;
+  height:100%;
+  position:relative;
+  display:block;
+  text-align: center;
+  position:relative;
+}
+
+.full-stretch-nav .big-nav-content li {
+  vertical-align: middle;
+  text-align: center;
+  width:120px;
+  display: inline-block;
+}
+
+.full-stretch-nav .big-nav-content .first {
+  border-left:1px solid #cccccc;
+}
+
+.full-stretch-nav .big-nav-content .middle  {
+  border-left:1px solid #cccccc;
+}
+
+.full-stretch-nav .big-nav-content .last {
+  border-left:1px solid #cccccc;
+  border-right:1px solid #cccccc;
+}
+
+.full-stretch-nav .big-nav-content li {
+  line-height: 50%;
+  width:190px;
+  min-height:100%;
+}
+
+.full-stretch-nav .big-nav-content li a {
+  font-family: 'PT Serif', serif;
+  font-weight: 300;
+  font-size: 1.25em;
+  text-align: center;
+  line-height: 40px;
+  vertical-align: middle;
+  vertical-align: middle;
+  text-transform:uppercase;
+}
+
+.copyright p {
+  margin-bottom: 5px;
+}
+
+.footer-menu > ul > li { 
+  display: inline; 
+  padding-left: 5px;
+  padding-right: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+ul.unstyled {
+  margin: 2px auto;
+  line-height: 1.4;
+}
+
+.unstyled li {
+  display: inline;
+  text-align: center;
+}
+
+#main {
+  margin-bottom: 0px;
+}

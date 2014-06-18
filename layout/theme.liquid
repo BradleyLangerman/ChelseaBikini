@@ -105,7 +105,7 @@
 
   <!-- Begin wrapper -->
   <div id="transparency" class="wrapper">
-    <div class="row">
+    <div class="row" id="main" >
       <!-- Begin right navigation -->
       {% if settings.navigation_alignment == "right" %}
       <div class="row" id="header">
@@ -195,11 +195,11 @@
         <!-- End latest blog post -->
 
         <!-- Begin footer navigation -->
-        <div class="span4 footer-menu">
+        <div class="span12 footer-menu">          
           <h4>{{ settings.footer_linklist_title }}</h4>
           <ul class="unstyled">
             {% for link in linklists[settings.footer_linklist].links %}
-              <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+              <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>{% unless forloop.last %}|{% endunless %}
             {% endfor %}
           </ul>
         </div>
@@ -207,7 +207,6 @@
 
         <!-- Begin newsletter/social -->
         <div class="span4">
-
           {% if settings.footer_display_newsletter %} 
           <div class="p30">
             <h4>{{ settings.footer_newsletter_title }}</h4>
@@ -217,27 +216,13 @@
           </div>
           {% endif %}
 
-          <div class="clearfix">
-          {% if settings.enable_social_links %}
-            <h4>{{ settings.footer_social_title }}</h4>
-            {% if settings.twitter_link != '' %}<a href="{{ settings.twitter_link }}" title="{{ shop.name }} on Twitter" class="icon-social twitter">Twitter</a>{% endif %}
-            {% if settings.facebook_link != '' %}<a href="{{ settings.facebook_link }}" title="{{ shop.name }} on Facebook" class="icon-social facebook">Facebook</a>{% endif %}
-            {% if settings.youtube_link != '' %}<a href="{{ settings.youtube_link }}" title="{{ shop.name }} on YouTube" class="icon-social youtube">YouTube</a>{% endif %}
-            {% if settings.atom_link != '' %}<a href="{{ settings.atom_link }}" title="{{ shop.name }} news" class="icon-social atom">Blog feed</a>{% endif %}
-            {% if settings.instagram_link != '' %}<a href="{{ settings.instagram_link }}" title="{{ shop.name }} on Instagram" class="icon-social instagram">Instagram</a>{% endif %}
-            {% if settings.pinterest_link != '' %}<a href="{{ settings.pinterest_link }}" title="{{ shop.name }} on Pinterest" class="icon-social pinterest">Pinterest</a>{% endif %}
-            {% if settings.vimeo_link != '' %}<a href="{{ settings.vimeo_link }}" title="{{ shop.name }} on Vimeo" class="icon-social vimeo">Vimeo</a>{% endif %}
-            {% if settings.tumblr_link != '' %}<a href="{{ settings.tumblr_link }}" title="{{ shop.name }} on Tumblr" class="icon-social tumblr">Tumblr</a>{% endif %}
-            {% if settings.google_link != '' %}<a href="{{ settings.google_link }}" title="{{ shop.name }} on Google+" class="icon-social google">Google+</a>{% endif %}
-          {% endif %}
-          </div>
 
         </div>
         <!-- End newsletter/social -->
 
         <!-- Begin copyright -->
         <div class="span12 tc copyright">
-          <p>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name }} | {{ powered_by_link }} {% if settings.designed_by %}{% endif %} </p>
+          <p class="copyright">Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}{% if settings.designed_by %}{% endif %} </p>
         </div>
         <!-- End copyright -->
 
