@@ -26,6 +26,7 @@
 
   <!--  Google Fonts  -->
   <link href='http://fonts.googleapis.com/css?family=Cinzel:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption|PT+Serif' rel='stylesheet' type='text/css'>
 
   {% include 'fb-open-graph-tags' %}
 
@@ -59,13 +60,12 @@
       <div class="span12 clearfix">
         <ul class="unstyled">
 
-          <!-- Social Icons -->
-          <a href="{{ settings.pinterest_link }}" title="{{ shop.name }} on Pinterest"><i class="fa fa-pinterest fa-2x fa-inverse"></i></a>
-          <a href="{{ settings.instagram_link }}" title="{{ shop.name }} on Instagram"><i class="fa fa-instagram fa-2x fa-inverse"></i></a>
-          <a href="{{ settings.facebook_link }}" title="{{ shop.name }} on Facebook"><i class="fa fa-facebook fa-2x fa-inverse"></i></a>
-          <a href="{{ settings.twitter_link }}" title="{{ shop.name }} on Twitter"><i class="fa fa-twitter fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.pinterest_link }}" class='toolbar-social-icons' title="{{ shop.name }} on Pinterest"><i class="fa fa-pinterest fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.instagram_link }}" class='toolbar-social-icons' title="{{ shop.name }} on Instagram"><i class="fa fa-instagram fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.facebook_link }}" class='toolbar-social-icons' title="{{ shop.name }} on Facebook"><i class="fa fa-facebook fa-2x fa-inverse"></i></a>
+          <a href="{{ settings.twitter_link }}" class='toolbar-social-icons' title="{{ shop.name }} on Twitter"><i class="fa fa-twitter fa-2x fa-inverse"></i></a>
 
-          </li>
+        
           {% if cart.item_count != 0 %}
           <li id="checkout-link"><a href="/cart" title="Checkout">Checkout</a></li>
           {% endif %}
@@ -83,17 +83,15 @@
 
 <!--  Begin Logo  -->
   <div class='main-logo wrapper'>
-    <div class="span3 inner-left">
-      <div class="logo">
-        {% if settings.use_logo %}
-        <a href="/">Chelsea Bikinii </a>
-        {% if template == 'index' %}
-        <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
-        {% endif %}
-        {% else %}
-        <h1><a href="/">{{ shop.name }}</a></h1>
-        {% endif %}
-      </div>
+    <div class="logo">
+      {% if settings.use_logo %}
+      <h1><a href="/">Chelsea Bikini</a></h1>
+      {% if template == 'index' %}
+      <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+      {% endif %}
+      {% else %}
+      <h1><a href="/">{{ shop.name }}</a></h1>
+      {% endif %}
     </div>
   </div>
 
@@ -210,7 +208,7 @@
         <!-- Begin newsletter/social -->
         <div class="span4">
 
-          {% if settings.footer_display_newsletter %}
+          {% if settings.footer_display_newsletter %} 
           <div class="p30">
             <h4>{{ settings.footer_newsletter_title }}</h4>
             <form action="{{ settings.mailing_list_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
